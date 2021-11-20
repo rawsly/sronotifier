@@ -89,6 +89,7 @@ const formatDate = (date = new Date()) => format(date, 'HH:mm - dd/MM/yyyy');
 const COLORS = {
 	default: '#D7816A',
 	red: '#f56565',
+	success: '#9BC53D',
 }
 
 module.exports = { UNIQUES, CHANNEL_IDS, COLORS, formatDate };

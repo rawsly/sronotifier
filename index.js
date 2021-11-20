@@ -182,6 +182,26 @@ app.post('/api/disconnect', async (req, res) => {
 	}
 });
 
+app.post('/api/reconnect', async (req, res) => {
+	try {
+		const channelId = CHANNEL_IDS.disconnects;
+		if (!channelId) {
+			return;
+		}
+		const channel = await client.channels.fetch(channelId);
+		const embedMessage = new MessageEmbed()
+			.setColor(COLORS.success)
+			.setTitle(`You are reconnected!`)
+			.setAuthor(formatDate());
+		await channel.send({ embeds: [embedMessage] });
+		res.json({ success: true, message: `[SRO Notifier][RECONNECT] Notification sent!` });
+	} catch (err) {
+		console.error(err);
+		res.json({ success: false, message: 'Something went wrong!' });
+	}
+});
+
+
 app.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`);
 });
