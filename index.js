@@ -201,6 +201,27 @@ app.post('/api/reconnect', async (req, res) => {
 	}
 });
 
+app.post('/api/consignment-trade', async (req, res) => {
+	const { content, opcode, data } = req.body;
+	console.log("opcode: ", opcode, "data: ", data);
+	try {
+		const channelId = CHANNEL_IDS.consignment;
+		if (!channelId) {
+			return;
+		}
+		const channel = await client.channels.fetch(channelId);
+		const embedMessage = new MessageEmbed()
+			.setColor(COLORS.success)
+			.setTitle(content)
+			.setAuthor(formatDate());
+		await channel.send({ embeds: [embedMessage] });
+		res.json({ success: true, message: `[SRO Notifier][CONSIGNMENT_TRADE] Notification sent! - ${content}` });
+	} catch (err) {
+		console.error(err);
+		res.json({ success: false, message: 'Something went wrong!' });
+	}
+});
+
 
 app.listen(port, () => {
 	console.log(`Example app listening at http://localhost:${port}`);

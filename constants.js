@@ -81,7 +81,8 @@ const CHANNEL_IDS = {
 	disconnects: '909062801824288779',
 	private: '909062838801293322',
 	party: '909134457016053830',
-	dead: '909062926013444116'
+	dead: '909062926013444116',
+	consignment: '936641009859833937'
 };
 
 const formatDate = (date = new Date()) => format(date, 'HH:mm - dd/MM/yyyy');
